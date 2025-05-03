@@ -1,0 +1,62 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif; /* Set the font for the entire page */
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text color */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add padding around the content */
+}
+
+h1 {
+    text-align: center; /* Center the main heading */
+}
+
+/* Tabs Container */
+.tabs {
+    margin-bottom: 20px; /* Space below the tabs */
+    text-align: center; /* Center the tabs */
+}
+
+/* Tab Button Styles */
+.tab-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 15px; /* Padding around the text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin: 0 5px; /* Space between buttons */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+/* Tab Button Hover Effect */
+.tab-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Tab Content Styles */
+.tab-content {
+    display: none; /* Hide all tab content by default */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block; /* Show active tab content */
+}
+
+/* Image Styles */
+.tab-content img {
+    width: 100%; /* Responsive width */
+    max-width: 300px; /* Maximum width for images */
+    margin: 10px; /* Space around images */
+    border-radius: 5px; /* Rounded corners for images */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .tab-button {
+        width: 100%; /* Full width buttons on small screens */
+        margin: 5px 0; /* Space between buttons */
+    }
+}
