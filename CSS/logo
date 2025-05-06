@@ -1,1 +1,40 @@
+/* Logo link common styles */
+.logo-link {
+  position: fixed;
+  left: 10px;
+  width: 60px;  /* adjust as needed */
+  height: 60px; /* adjust as needed */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: block;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+/* Top-left logo link */
+.logo-link.top-left {
+  top: 10px;
+  background-image: url('www.sugarwares.com-logo.png'); 
+  }
+
+/* Bottom-left logo link */
+.logo-link.bottom-left {
+  bottom: 10px;
+  background-image: url('www.sugarwares.com-logo.png'); 
+}
+
+/* Optional hover effect */
+.logo-link:hover {
+  opacity: 0.8;
+}
+
+/* Make sure clickable area is big enough on mobile */
+@media (max-width: 600px) {
+  .logo-link {
+    width: 50px;
+    height: 50px;
+    left: 8px;
+  }
+}
 
