@@ -15,13 +15,13 @@
 /* Top-left logo link */
 .logo-link.top-left {
   top: 10px;
-  background-image: url('www.sugarwares.com-logo.png'); 
+  background-image: url('../images/www.sugarwares.com-logo.png'); 
   }
 
 /* Bottom-left logo link */
 .logo-link.bottom-left {
   bottom: 10px;
-  background-image: url('www.sugarwares.com-logo.png'); 
+  background-image: url('../images/www.sugarwares.com-logo.png'); 
 }
 
 /* Optional hover effect */
