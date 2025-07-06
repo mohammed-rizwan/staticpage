@@ -816,6 +816,25 @@ body.custom-background { background-color: #ffffff; }
 				<div class="elementor-element elementor-element-1544951 elementor-widget elementor-widget-shortcode" data-id="1544951" data-element_type="widget" data-widget_type="shortcode.default">
 				<div class="elementor-widget-container">
 					<div class="elementor-shortcode">
+<style>
+    button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: opacity 0.3s ease;
+    }
+    button.blinking {
+        animation: blink 0.5s linear infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0.5; }
+    }
+</style>
+
 <div class="wpcf7 no-js" id="wpcf7-f284-p275-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
 <form action="send_email.php" method="POST">
@@ -830,16 +849,17 @@ body.custom-background { background-color: #ffffff; }
                         <span style="margin-right: 10px;">What is 1 + 1?</span>
                         <input type="text" name="captcha" required style="width: 50px; margin-right: 10px;">
                     </div>
-                </div>            <button type="submit">Submit</button>
-        </form>>
+			<button type="submit" id="submitBtn">Submit</button>        </form>>
 </div>
 </div>
-		</section>
+	<script>
+    document.querySelector('form').addEventListener('submit', function() {
+        document.getElementById('submitBtn').classList.add('blinking');
+    });
+</script>
 					</div>
 		</div>
-			
-		</section>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-9f58d32 elementor-section-full_width elementor-section-stretched padding0 elementor-section-height-default elementor-section-height-default" data-id="9f58d32" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+		<section class="elementor-section elementor-top-section elementor-element elementor-element-9f58d32 elementor-section-full_width elementor-section-stretched padding0 elementor-section-height-default elementor-section-height-default" data-id="9f58d32" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
 						<div class="elementor-container elementor-column-gap-default">
 					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-a1491f3" data-id="a1491f3" data-element_type="column">
 			<div class="elementor-widget-wrap elementor-element-populated">
