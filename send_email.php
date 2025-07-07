@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = "info@realiablepaper.in";  // Your email
+    $to = "get2hema2973@gmail.com";  // Your email
     $name = $_POST["name"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Construct email
     $email_subject = "New Contact Form Submission: $subject";
-    $email_body = "
+    $email_body = ""
         Name: $name\n
         Email: $email\n
         Phone: $phone\n
