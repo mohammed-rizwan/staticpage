@@ -827,19 +827,27 @@ body.custom-background { background-color: #ffffff; }
 <input type="hidden" name="_wpcf7_container_post" value="275" />
 <input type="hidden" name="_wpcf7_posted_data_hash" value="" />
 </div>
-<p><span class="wpcf7-form-control-wrap" data-name="Name"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Name" value="" type="text" name="Name" /></span><br />
-<span class="wpcf7-form-control-wrap" data-name="Email"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email" value="" type="email" name="Email" /></span><br />
-<span class="wpcf7-form-control-wrap" data-name="PhoneNumber"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="Phone Number" value="" type="tel" name="PhoneNumber" /></span><br />
-<span class="wpcf7-form-control-wrap" data-name="Subject"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Subject" value="" type="text" name="Subject" /></span><br />
-<span class="wpcf7-form-control-wrap" data-name="message"><textarea cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Write a message" name="message"></textarea></span><br />
-<span class="wpcf7-form-control-wrap" data-name="quiz-923"><label><span class="wpcf7-quiz-label">1+1=?</span> <input size="40" class="wpcf7-form-control wpcf7-quiz" autocomplete="off" aria-required="true" aria-invalid="false" type="text" name="quiz-923" /></label><input type="hidden" name="_wpcf7_quiz_answer_quiz-923" value="c51551e5ff624178ea814a31229f018c" /></span>
-</p>
-<p class="aiowps-captcha hide-when-displaying-tfa-input"><label for="aiowps-captcha-answer">Please enter an answer in digits:</label>
-</p>
-<div class="aiowps-captcha-equation hide-when-displaying-tfa-input">
-	<p><strong>12 &#8722; 3 = <input type="hidden" name="aiowps-captcha-string-info" class="aiowps-captcha-string-info" value="1oi9vag5ew" /><input type="hidden" name="aiowps-captcha-temp-string" class="aiowps-captcha-temp-string" value="1744798752" /><input type="text" size="2" class="aiowps-captcha-answer" name="aiowps-captcha-answer" value="" autocomplete="off" /></strong>
-	</p>
-</div>
+
+    <div class="container">
+        <div class="form-container">
+            <form action="send_email.php" method="POST" onsubmit="return validateForm(event)">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <div class="captcha-container" style="margin: 15px 0;">
+                    <p style="margin-bottom: 10px;">Prove you're human:</p>
+                    <div style="display: flex; align-items: center;">
+                        <span style="margin-right: 10px;">What is 1 + 1?</span>
+                        <input type="text" name="captcha" required style="width: 50px; margin-right: 10px;">
+                    </div>
+                </div>
+                <button type="submit">id="Submitbtn"
+		        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+		</button>
+            </form>
+        </div>
 <p><span class='wpcf7-form-control-wrap' data-name='aiowps-captcha'></span><input class="wpcf7-form-control has-spinner wpcf7-submit" type="submit" value="Submit" />
 </p><div class="wpcf7-response-output" aria-hidden="true"></div>
 </form>
