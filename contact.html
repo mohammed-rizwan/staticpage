@@ -827,6 +827,11 @@ body.custom-background { background-color: #ffffff; }
 <input type="hidden" name="_wpcf7_container_post" value="275" />
 <input type="hidden" name="_wpcf7_posted_data_hash" value="" />
 </div>
+	
+function validateForm(event) {
+    // Perform any additional validation if needed
+    return true; // Allow form submission
+}
 <div class="container">
     <div class="form-container">
         <form action="send_email.php" method="POST" onsubmit="return validateForm(event)">
@@ -835,11 +840,14 @@ body.custom-background { background-color: #ffffff; }
             <input type="tel" name="phone" placeholder="Phone Number" required>
             <input type="text" name="subject" placeholder="Subject" required>
             <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-</div>
-
+            <div class="captcha-container" style="margin: 15px 0;">
+                <p style="margin-bottom: 10px;">Prove you're human:</p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="white-space: nowrap;">What is 1 + 1?</span>
+                    <input type="text" name="captcha" required style="width: 50px;">
                 </div>
             </div>
-            <button type="submit" id="Submitbtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+            <button type="submit" id="Submitbtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
                 Submit
             </button>
         </form>
