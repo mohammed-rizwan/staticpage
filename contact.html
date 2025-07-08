@@ -836,10 +836,11 @@ body.custom-background { background-color: #ffffff; }
             <input type="text" name="subject" placeholder="Subject" required>
             <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             <div class="captcha-container" style="margin: 15px 0;">
-                <p style="margin-bottom: 10px;">Prove you're human:</p>
-                <div style="display: flex; align-items: center;">
-                    <span style="margin-right: 10px; white-space: nowrap;">What is 1 + 1?</span>
-                    <input type="text" name="captcha" required style="width: 50px; margin-right: 10px;">
+                <p style="margin-bottom: 10px;">Prove you're human:</p><div style="display: grid; grid-template-columns: auto 50px; gap: 10px; align-items: center;">
+    <span>What is 1 + 1?</span>
+    <input type="text" name="captcha" required>
+</div>
+
                 </div>
             </div>
             <button type="submit" id="Submitbtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
