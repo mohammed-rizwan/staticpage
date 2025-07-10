@@ -830,7 +830,8 @@ body.custom-background { background-color: #ffffff; }
 
 <div class="container">
     <div class="form-container">
-        <form action="send_email.php" method="POST">
+        <form action="https://api.web3forms.com/submit" method="POST">
+	    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <input type="text" name="name" placeholder="Enter Your Name" class="contact-inputs" required>
             <input type="email" name="email" placeholder="Enter Your Email i'd" class="contact-inputs" required>
             <input type="tel" name="phone" placeholder="Enter Your Mobile Number" class="contact-inputs" required>
