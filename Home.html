@@ -1378,77 +1378,6 @@ ecological lifestyle</h2>		</div>
                         </div>
                     </div>
                     <div class="ft_footer_right">
-<!--                         <div class="ft_footer_right_newslette">
- -->
-<!--                           <p>Subscribe to tasty Apeel updates.</p>
- -->
-<!--                           <form id="subscription-form" aria-label="Contact form" novalidate>
- -->
-<!--                             <label for="email" class="sr-only">Email Address</label>
- -->
-<!--                             <input 
- -->
-<!--                               type="email" 
- -->
-<!--                               id="email" 
- -->
-<!--                               name="Email" 
- -->
-<!--                               placeholder="Enter Your Email ID" 
- -->
-<!--                               aria-required="true" 
- -->
-<!--                               required 
- -->
-<!--                             />
- -->
-<!--                             <input type="submit" value="Submit" />
- -->
-<!--                             <div id="form-message" role="alert" aria-live="polite"></div>
- -->
-                          </form>
-                        </div>
-                      </div>
-                      
-                      <script>
-                        (function() {
-                          const form = document.getElementById('subscription-form');
-                          const emailInput = form.querySelector('input[type="email"]');
-                          const messageDiv = document.getElementById('form-message');
-                          
-                          form.addEventListener('submit', function(event) {
-                            event.preventDefault();
-                            
-                            const emailValue = emailInput.value.trim();
-                            messageDiv.textContent = '';
-                            messageDiv.className = 'message';
-                            
-                            if (!emailValue) {
-                              messageDiv.textContent = 'Please enter your email address.';
-                              messageDiv.classList.add('error');
-                              emailInput.focus();
-                              return;
-                            }
-                            
-                            // Simple email format validation regex
-                            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                            if (!emailPattern.test(emailValue)) {
-                              messageDiv.textContent = 'Please enter a valid email address.';
-                              messageDiv.classList.add('error');
-                              emailInput.focus();
-                              return;
-                            }
-                            
-                            // Simulate successful submission
-                            messageDiv.textContent = 'Thank you for subscribing!';
-                            messageDiv.classList.add('success');
-                            form.reset();
-                          });
-                        })();
-                      </script>
-                    
-                    
-                        </div>
                         <div class="ft_footer_right_links">
                             <ul class="ft_footer_right_links_pages">
                                 <li><a href="Home.html">Home</a></li>
@@ -1470,7 +1399,8 @@ ecological lifestyle</h2>		</div>
                 </div>
             </div>
         </div>
-    </div>
+</div>
+
 
 </footer><!-- #site-footer -->
 <a href="#" id="scroll" title="Scroll to Top" style="display: inline;">Top<span></span></a>
