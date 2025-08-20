@@ -828,20 +828,76 @@ body.custom-background { background-color: #ffffff; }
 <input type="hidden" name="_wpcf7_posted_data_hash" value="" />
 </div>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-inputs {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .success-message, .error-message {
+            display: none;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
 <div class="container">
     <div class="form-container">
-        <form action="https://api.web3forms.com/submit" method="POST">
-	    <input type="hidden" name="access_key" value="b416bb26-5668-4947-aa3c-2b5060f8ecc1">
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="b416bb26-5668-4947-aa3c-2b5060f8ecc1">
             <input type="text" name="name" placeholder="Enter Your Name" class="contact-inputs" required>
-            <input type="email" name="email" placeholder="Enter Your Email i'd" class="contact-inputs" required>
+            <input type="email" name="email" placeholder="Enter Your Email" class="contact-inputs" required>
             <input type="tel" name="phone" placeholder="Enter Your Mobile Number" class="contact-inputs" required>
             <input type="text" name="subject" placeholder="Subject" required>
             <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
-			<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-            <button type="submit"> Submit form </button>
-	</form>
-		 </div>
-            </div>
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            <button type="submit">Submit Form</button>
+        </form>
+        <div id="success-message" class="success-message">Your message has been sent successfully!</div>
+        <div id="error-message" class="error-message">There was an error sending your message. Please try again later.</div>
+    </div>
+</div>
+
+
     </div>
 </div>
 
@@ -992,6 +1048,33 @@ if (form.method != "get") {  var inputy7bv3lca = document.createElement("input")
 			document.body.className = c;
 		})();
 	</script>
+		<script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(this);
+        
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('error-message').style.display = 'none';
+                this.reset(); // Reset the form
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('success-message').style.display = 'none';
+            }
+        })
+        .catch(error => {
+            document.getElementById('error-message').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+        });
+    });
+</script>
 	<script type="text/template" id="tmpl-variation-template">
 	<div class="woocommerce-variation-description">{{{ data.variation.variation_description }}}</div>
 	<div class="woocommerce-variation-price">{{{ data.variation.price_html }}}</div>
@@ -1107,6 +1190,7 @@ var wc_single_product_params = {"i18n_required_rating_text":"Please select a rat
 </body>
 </html>
 <!-- Page cached by LiteSpeed Cache 6.5.4 on 2025-04-16 10:19:12 -->
+
 
 
 
