@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - Sugarwares</title>
+    <meta name="description" content="We're experiencing technical difficulties. Please try again later or contact Sugarwares support.">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" type="image/x-icon" href="images/images-favicon-32x32.png">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="site-logo">
+                    <a href="index.html" class="custom-logo-link">
+                        <img src="images/www.sugarwares.com-logo.png" alt="Sugarwares Logo" class="custom-logo">
+                    </a>
+                </div>
+                <nav class="main-navigation">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="error-section">
+            <div class="container">
+                <div class="error-content">
+                    <div class="error-code">500</div>
+                    <h1 class="error-title">Server Error</h1>
+                    <p class="error-message">
+                        We're experiencing technical difficulties on our end. 
+                        Our team has been notified and is working to fix the issue.
+                    </p>
+                    <div class="error-actions">
+                        <a href="index.html" class="btn btn-primary">Try Again</a>
+                        <a href="contact.html" class="btn btn-secondary">Contact Support</a>
+                        <button onclick="location.reload()" class="btn btn-outline">Refresh Page</button>
+                    </div>
+                    <div class="error-help">
+                        <h3>What you can do:</h3>
+                        <ul>
+                            <li>Wait a few minutes and try again</li>
+                            <li>Clear your browser cache and cookies</li>
+                            <li>Try using a different browser</li>
+                            <li>Contact our technical support team</li>
+                        </ul>
+                    </div>
+                    <div class="error-status">
+                        <p><strong>Error ID:</strong> <span id="error-id">500-<span id="timestamp"></span></span></p>
+                        <p><strong>Time:</strong> <span id="error-time"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sugarwares</h3>
+                    <p>Premium sugarcane bagasse products for a sustainable future.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@sugarwares.com</p>
+                    <p>Phone: +91-999-999-9999</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sugarwares. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JavaScript/main.js"></script>
+    <script>
+        // Set error details
+        document.getElementById('timestamp').textContent = Date.now();
+        document.getElementById('error-time').textContent = new Date().toLocaleString();
+        
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('ServiceWorker registration successful');
+                })
+                .catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        }
+    </script>
+</body>
+</html>

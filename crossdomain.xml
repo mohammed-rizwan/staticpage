@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
+<cross-domain-policy>
+    <allow-access-from domain="*.sugarwares.com" />
+    <allow-access-from domain="sugarwares.com" />
+    <allow-access-from domain="www.sugarwares.com" />
+    
+    <!-- Allow access from trusted domains -->
+    <allow-access-from domain="*.google.com" />
+    <allow-access-from domain="*.facebook.com" />
+    <allow-access-from domain="*.twitter.com" />
+    
+    <!-- Site control -->
+    <site-control permitted-cross-domain-policies="master-only" />
+    
+    <!-- Allow HTTP methods -->
+    <allow-http-request-headers-from domain="*" headers="*" />
+</cross-domain-policy>

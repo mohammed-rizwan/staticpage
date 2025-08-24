@@ -1,0 +1,57 @@
+{
+  "name": "sugarwares-website",
+  "version": "1.0.0",
+  "description": "Premium sugarcane bagasse products website for Sugarwares",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8000 -c-1",
+    "build": "npm run build:css && npm run build:js && npm run build:images",
+    "build:css": "postcss CSS/main.css -o build/css/main.min.css",
+    "build:js": "uglifyjs JavaScript/main.js JavaScript/script.js -o build/js/main.min.js",
+    "build:images": "imagemin images/* --out-dir=build/images",
+    "deploy": "npm run build && rsync -av build/ user@server:/var/www/sugarwares/",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint JavaScript/*.js",
+    "format": "prettier --write \"**/*.{js,css,html,md}\""
+  },
+  "keywords": [
+    "sugarcane",
+    "bagasse",
+    "eco-friendly",
+    "disposable",
+    "food-packaging",
+    "sustainable"
+  ],
+  "author": "Sugarwares Team",
+  "license": "Proprietary",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sugarwares/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sugarwares/website/issues"
+  },
+  "homepage": "https://sugarwares.com",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "uglify-js": "^3.17.4",
+    "imagemin": "^8.0.1",
+    "imagemin-cli": "^7.0.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

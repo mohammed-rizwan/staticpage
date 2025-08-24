@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Sugarwares</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Return to Sugarwares homepage for premium sugarcane bagasse products.">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" type="image/x-icon" href="images/images-favicon-32x32.png">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="site-logo">
+                    <a href="index.html" class="custom-logo-link">
+                        <img src="images/www.sugarwares.com-logo.png" alt="Sugarwares Logo" class="custom-logo">
+                    </a>
+                </div>
+                <nav class="main-navigation">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="error-section">
+            <div class="container">
+                <div class="error-content">
+                    <div class="error-code">404</div>
+                    <h1 class="error-title">Page Not Found</h1>
+                    <p class="error-message">
+                        Oops! The page you're looking for doesn't exist. 
+                        It might have been moved, deleted, or you entered the wrong URL.
+                    </p>
+                    <div class="error-actions">
+                        <a href="index.html" class="btn btn-primary">Go to Homepage</a>
+                        <a href="products.html" class="btn btn-secondary">Browse Products</a>
+                        <a href="contact.html" class="btn btn-outline">Contact Support</a>
+                    </div>
+                    <div class="error-help">
+                        <h3>Looking for something specific?</h3>
+                        <ul>
+                            <li><a href="SB_plates.html">Bagasse Plates</a></li>
+                            <li><a href="SB_Bowls.html">Bagasse Bowls</a></li>
+                            <li><a href="SB_container.html">Food Containers</a></li>
+                            <li><a href="about.html">About Sugarwares</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sugarwares</h3>
+                    <p>Premium sugarcane bagasse products for a sustainable future.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@sugarwares.com</p>
+                    <p>Phone: +91-999-999-9999</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sugarwares. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="JavaScript/main.js"></script>
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('ServiceWorker registration successful');
+                })
+                .catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        }
+    </script>
+</body>
+</html>
