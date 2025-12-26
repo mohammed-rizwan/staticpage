@@ -1,18 +1,450 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Deriny Technologies — enterprise-grade software development company offering cloud, AI, and full-stack solutions.">
   <title>Deriny Technologies | Enterprise Software Development</title>
-  <link rel="stylesheet" href="assets/styles.css">
-  <script src="assets/site.js" defer></script>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #ec4899;
+      --accent: #14b8a6;
+      --bg: #0f172a;
+      --bg-soft: #1e293b;
+      --text: #f1f5f9;
+      --muted: #cbd5e1;
+      --glass: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --panel-bg: rgba(30, 41, 59, 0.6);
+      --input-bg: rgba(15, 23, 42, 0.7);
+      --footer-bg: rgba(15, 23, 42, 0.95);
+      --header-bg: rgba(15, 23, 42, 0.85);
+      --header-bg-scrolled: rgba(15, 23, 42, 0.94);
+      --overlay-color: rgba(15, 23, 42, 0.85);
+      --tag-bg: rgba(255, 255, 255, 0.07);
+      --body-bg: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.08), transparent 35%),
+                 radial-gradient(circle at 80% 10%, rgba(236, 72, 153, 0.12), transparent 30%),
+                 radial-gradient(circle at 50% 80%, rgba(20, 184, 166, 0.08), transparent 30%),
+                 var(--bg);
+      --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max-width: 1200px;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-soft: #e2e8f0;
+      --text: #0f172a;
+      --muted: #475569;
+      --glass: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.14);
+      --panel-bg: rgba(255, 255, 255, 0.94);
+      --input-bg: rgba(255, 255, 255, 0.95);
+      --footer-bg: rgba(248, 250, 252, 0.98);
+      --header-bg: rgba(255, 255, 255, 0.88);
+      --header-bg-scrolled: rgba(255, 255, 255, 0.96);
+      --overlay-color: rgba(255, 255, 255, 0.85);
+      --tag-bg: rgba(15, 23, 42, 0.08);
+      --body-bg: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.10), transparent 36%),
+                 radial-gradient(circle at 80% 12%, rgba(236, 72, 153, 0.12), transparent 32%),
+                 radial-gradient(circle at 50% 82%, rgba(20, 184, 166, 0.10), transparent 32%),
+                 var(--bg);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--body-bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.35s ease, color 0.25s ease;
+    }
+    body.no-scroll { overflow: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: min(92vw, var(--max-width)); margin: 0 auto; }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      z-index: 10000;
+    }
+    .skip-link:focus { left: 16px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(14px);
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--card-border);
+      transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    header.scrolled { background: var(--header-bg-scrolled); border-color: var(--card-border); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.6px;
+    }
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--gradient);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 10px 12px;
+      color: var(--muted);
+      transition: color 0.2s ease;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .nav-links a:not(.btn)::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 4px;
+      height: 2px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:not(.btn):hover, .nav-links a:not(.btn):focus-visible { color: var(--text); }
+    .nav-links a:not(.btn):hover::after, .nav-links a:not(.btn):focus-visible::after { transform: scaleX(1); }
+    .nav-links a:not(.btn).active { color: var(--text); }
+    .nav-links a:not(.btn).active::after { transform: scaleX(1); }
+    .nav-links .btn { color: #fff; }
+    .nav-links .btn:hover, .nav-links .btn:focus-visible { color: #fff; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      color: #fff;
+      background: var(--gradient);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.35);
+    }
+    .btn:hover, .btn:focus-visible { transform: translateY(-1px) scale(1.01); box-shadow: 0 16px 40px rgba(99, 102, 241, 0.45); }
+    .btn-outline { background: var(--glass); border-color: var(--card-border); color: var(--text); box-shadow: none; }
+    .btn-outline:hover, .btn-outline:focus-visible { border-color: var(--primary); color: var(--text); box-shadow: 0 12px 30px rgba(99, 102, 241, 0.2); background: var(--glass); }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--glass);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .theme-toggle:hover, .theme-toggle:focus-visible { transform: translateY(-1px); border-color: var(--primary); box-shadow: 0 12px 24px rgba(0,0,0,0.25); }
+    .theme-switch { display: inline-flex; align-items: center; gap: 8px; }
+    .theme-label { color: var(--muted); font-weight: 700; font-size: 0.95rem; min-width: 44px; text-align: left; }
+
+    .menu-toggle { display: none; background: var(--glass); border: 1px solid var(--card-border); color: var(--text); padding: 10px 12px; border-radius: var(--radius-sm); }
+
+    main { overflow: hidden; }
+
+    section { padding: 100px 0; position: relative; }
+
+    .section-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .eyebrow { letter-spacing: 2px; color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
+    h1, h2, h3, h4 { margin: 0; }
+    h1 { font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.1; }
+    h2 { font-size: clamp(2.2rem, 4vw, 3rem); }
+    h3 { font-size: 1.3rem; }
+    p { color: var(--muted); margin: 0; }
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      padding-top: 40px;
+    }
+    .hero-copy { position: relative; z-index: 2; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--glass);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      backdrop-filter: blur(12px);
+    }
+    .gradient-text { background: var(--gradient); -webkit-background-clip: text; color: transparent; }
+    .hero-actions { display: flex; gap: 14px; margin: 26px 0 22px; flex-wrap: wrap; }
+    .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 10px; }
+    .stat-card {
+      padding: 16px 18px;
+      background: var(--glass);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
+    .stat-card strong { display: block; font-size: 1.5rem; color: var(--text); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 420px;
+      padding: 24px;
+      background: var(--panel-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .orb { position: absolute; width: 220px; height: 220px; border-radius: 50%; filter: blur(30px); opacity: 0.75; animation: float 12s ease-in-out infinite; }
+    .orb-1 { background: rgba(99, 102, 241, 0.45); top: -40px; right: 20px; animation-delay: 0s; }
+    .orb-2 { background: rgba(236, 72, 153, 0.35); bottom: -60px; left: 10%; animation-delay: 2s; }
+    .orb-3 { background: rgba(20, 184, 166, 0.35); top: 40%; left: 50%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-14px) scale(1.03); }
+    }
+
+    .hero-panel {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 16px;
+      color: var(--text);
+    }
+    .mini-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--card-border);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+    }
+    .pill {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--gradient);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .grid { display: grid; gap: 20px; }
+    .services-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .service-card {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: var(--glass);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.2); box-shadow: 0 18px 40px rgba(0,0,0,0.3); }
+    .service-icon { width: 64px; height: 64px; border-radius: 18px; background: linear-gradient(135deg, var(--icon-bg1, rgba(99,102,241,0.28)), var(--icon-bg2, rgba(236,72,153,0.20))); display: grid; place-items: center; color: var(--text); margin-bottom: 14px; border: 1px solid var(--card-border); font-size: clamp(22px, 3.2vw, 28px); }
+    .service-card.dev { --icon-bg1: rgba(99,102,241,0.38); --icon-bg2: rgba(79,70,229,0.28); }
+    .service-card.cloud { --icon-bg1: rgba(14,165,233,0.38); --icon-bg2: rgba(6,182,212,0.28); }
+    .service-card.ai { --icon-bg1: rgba(236,72,153,0.38); --icon-bg2: rgba(99,102,241,0.26); }
+    .service-card.mobile { --icon-bg1: rgba(245,158,11,0.38); --icon-bg2: rgba(99,102,241,0.22); }
+    .service-card.devops { --icon-bg1: rgba(34,197,94,0.38); --icon-bg2: rgba(20,184,166,0.28); }
+    .service-card.ux { --icon-bg1: rgba(168,85,247,0.38); --icon-bg2: rgba(236,72,153,0.26); }
+    .service-card a { color: var(--accent); font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+
+    .portfolio-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: var(--glass);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn.active { background: var(--gradient); color: #fff; border-color: transparent; }
+
+    .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .project-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-soft);
+      border: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      isolation: isolate;
+      cursor: pointer;
+      outline: none;
+    }
+    .project-card:hover, .project-card:focus-within { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.45); border-color: rgba(255,255,255,0.18); }
+    .project-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+    .project-media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: radial-gradient(circle at 30% 30%, rgba(99,102,241,0.30), transparent 45%), radial-gradient(circle at 60% 60%, rgba(236,72,153,0.22), transparent 45%), radial-gradient(circle at 20% 80%, rgba(20,184,166,0.22), transparent 45%); border-bottom: 1px solid var(--card-border); }
+    .project-media img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.02); transition: transform 0.4s ease; }
+    .project-card:hover .project-media img, .project-card:focus-within .project-media img { transform: scale(1.06); }
+    .project-thumb { position: absolute; inset: 0; opacity: 0.9; }
+    .project-overlay { position: relative; padding: 20px; background: linear-gradient(180deg, transparent 10%, var(--overlay-color) 60%); transform: translateY(10px); opacity: 0.95; transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease; }
+    .project-card:hover .project-overlay, .project-card:focus-within .project-overlay { transform: translateY(0); opacity: 1; }
+    .tag { display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 999px; background: var(--tag-bg); border: 1px solid var(--card-border); color: var(--muted); font-size: 0.85rem; }
+    .project-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--accent); font-weight: 700; }
+    .project-link:hover, .project-link:focus-visible { text-decoration: underline; }
+
+    .tech-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+    .tech-card { text-align: center; padding: 18px; border-radius: var(--radius-md); background: var(--glass); border: 1px solid var(--card-border); backdrop-filter: blur(8px); transition: transform 0.2s ease; }
+    .tech-card:hover { transform: translateY(-4px); }
+
+    .about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+    .about-card { background: var(--glass); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 20px; backdrop-filter: blur(10px); box-shadow: var(--shadow); }
+    .list { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px; color: var(--muted); }
+    .list li { display: flex; align-items: center; gap: 10px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+    form {
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: var(--glass);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    label { font-weight: 600; color: var(--text); }
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
+    textarea { min-height: 140px; resize: vertical; }
+    .form-status { font-size: 0.95rem; color: var(--accent); }
+
+    .contact-card { background: var(--glass); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 20px; backdrop-filter: blur(10px); box-shadow: var(--shadow); display: grid; gap: 12px; }
+    .socials { display: flex; gap: 12px; }
+    .socials a { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--glass); border: 1px solid var(--card-border); transition: transform 0.2s ease, border-color 0.2s ease; }
+    .socials a:hover { transform: translateY(-2px); border-color: var(--primary); }
+
+    footer { border-top: 1px solid var(--card-border); background: var(--footer-bg); padding: 32px 0; margin-top: 40px; backdrop-filter: blur(12px); }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .footer-muted { color: var(--muted); }
+
+    .badge-inline { color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+
+    .reveal { opacity: 0; transform: translateY(24px) translate3d(var(--px, 0px), var(--py, 0px), 0); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0) translate3d(var(--px, 0px), var(--py, 0px), 0); }
+    [data-parallax] { will-change: transform; --px: 0px; --py: 0px; transform: translate3d(var(--px), var(--py), 0); }
+
+    @media (max-width: 900px) {
+      .nav-links { position: fixed; inset: 0; background: var(--header-bg-scrolled); flex-direction: column; padding: calc(96px + env(safe-area-inset-top, 0px)) 24px 24px; gap: 20px; transform: translateX(100%); transition: transform 0.3s ease; backdrop-filter: blur(12px); z-index: 1000; }
+      .nav-links.open { transform: translateX(0); }
+      .menu-toggle { display: inline-flex; position: relative; z-index: 1001; }
+      nav { padding: 14px 0; }
+      .hero { grid-template-columns: 1fr; }
+      .brand small { display: none; }
+      .brand-mark { width: 36px; height: 36px; }
+      .hero-visual { min-height: 320px; }
+      .portfolio-controls { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .portfolio-controls::-webkit-scrollbar { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 80px 0; }
+      nav { padding: 12px 0; }
+      .hero { padding-top: 10px; }
+      h1 { font-size: clamp(2.4rem, 8vw, 3rem); }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .hero-visual { min-height: 260px; }
+      .services-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+      .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      .tech-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header>
     <div class="container">
-      <nav aria-label="Primary">
+      <nav>
         <div class="brand" aria-label="Deriny Technologies">
           <div class="brand-mark">DT</div>
           <div>
@@ -20,36 +452,25 @@
             <small style="color: var(--muted); font-weight: 700; letter-spacing: 0.2px;">Enterprise Software Studio</small>
           </div>
         </div>
-        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">☰</button>
-        <div class="nav-links" id="primary-nav" aria-hidden="true">
-          <div class="mobile-brand">
-            <div class="brand-mark">DT</div>
-            <div>
-              <div style="font-size: 1.25em; font-weight: 800;">Deriny Technologies</div>
-              <small style="color: var(--muted); font-weight: 700; letter-spacing: 0.2px;">Enterprise Software Studio</small>
-            </div>
-          </div>
-          <button class="drawer-close" type="button" aria-label="Close navigation">✕</button>
-          <ul class="nav-list">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#technologies">Technologies</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          <a class="btn" href="#contact">Start a Project</a>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <div class="nav-links" role="navigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#services">Services</a>
+          <!--<a href="#portfolio">Portfolio</a>-->
+          <a href="#technologies">Technologies</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
           <div class="theme-switch">
             <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">🌙</button>
+            <span class="theme-label" data-theme-label aria-live="polite">Dark</span>
           </div>
+          <a class="btn" href="#contact">Start a Project</a>
         </div>
       </nav>
     </div>
   </header>
-  <div class="nav-backdrop"></div>
 
   <main id="main">
-    <!-- HOME SECTION -->
     <section id="home" class="container hero">
       <div class="hero-copy reveal" data-parallax="8">
         <div class="badge">Deriny Technologies • Enterprise software partners</div>
@@ -104,7 +525,6 @@
       </div>
     </section>
 
-    <!-- SERVICES SECTION -->
     <section id="services">
       <div class="container">
         <div class="section-header reveal">
@@ -116,63 +536,47 @@
           <a class="btn btn-outline" href="#contact">Book a discovery call</a>
         </div>
         <div class="grid services-grid">
-          <article class="service-card reveal" data-service="dev">
-            <div class="service-icon-wrapper">
-              <div class="service-icon">
-                <img src="assets/icons/settings_one.svg" alt="Code icon" aria-hidden="true">
-              </div>
-            </div>
-            <h3 class="service-title">Custom Software Development</h3>
-            <p class="service-desc">Deriny designs and delivers mission-critical platforms with rigorous engineering, observability, and resilience.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+          <article class="service-card dev reveal">
+            <div class="service-icon">⚙️</div>
+            <h3>Custom Software Development</h3>
+            <p>Deriny designs and delivers mission-critical platforms with rigorous engineering, observability, and resilience.</p>
+            <a href="#contact">Learn More →</a>
           </article>
-          <article class="service-card reveal" data-service="cloud">
-            <div class="service-icon-wrapper">
-              <div class="service-icon">
-                <img src="assets/icons/cloud_one.svg" alt="Cloud icon" aria-hidden="true">
-              </div>
-            </div>
-            <h3 class="service-title">Cloud Solutions</h3>
-            <p class="service-desc">Cloud-native architectures, cost optimization, and multi-region deployments tailored to your SLAs.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+          <article class="service-card cloud reveal">
+            <div class="service-icon">☁️</div>
+            <h3>Cloud Solutions</h3>
+            <p>Cloud-native architectures, cost optimization, and multi-region deployments tailored to your SLAs.</p>
+            <a href="#contact">Learn More →</a>
           </article>
-          <article class="service-card reveal" data-service="ai">
-            <div class="service-icon-wrapper">
-              <div class="service-icon">🤖</div>
-            </div>
-            <h3 class="service-title">AI & Machine Learning</h3>
-            <p class="service-desc">ML pipelines, GenAI copilots, and responsible AI governance integrated into your products.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+          <article class="service-card ai reveal">
+            <div class="service-icon">🤖</div>
+            <h3>AI & Machine Learning</h3>
+            <p>ML pipelines, GenAI copilots, and responsible AI governance integrated into your products.</p>
+            <a href="#contact">Learn More →</a>
           </article>
-          <article class="service-card reveal" data-service="mobile">
-            <div class="service-icon-wrapper">
-              <div class="service-icon">📱</div>
-            </div>
-            <h3 class="service-title">Mobile App Development</h3>
-            <p class="service-desc">Native and cross-platform experiences with offline-first patterns and rock-solid performance.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+          <article class="service-card mobile reveal">
+            <div class="service-icon">📱</div>
+            <h3>Mobile App Development</h3>
+            <p>Native and cross-platform experiences with offline-first patterns and rock-solid performance.</p>
+            <a href="#contact">Learn More →</a>
           </article>
-          <article class="service-card reveal" data-service="devops">
-            <div class="service-icon-wrapper">
-              <div class="service-icon">🚀</div>
-            </div>
-            <h3 class="service-title">DevOps & Automation</h3>
-            <p class="service-desc">CI/CD, infrastructure as code, and SRE practices that keep your releases fast and reliable.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+          <article class="service-card devops reveal">
+            <div class="service-icon">🚀</div>
+            <h3>DevOps & Automation</h3>
+            <p>CI/CD, infrastructure as code, and SRE practices that keep your releases fast and reliable.</p>
+            <a href="#contact">Learn More →</a>
           </article>
-          <article class="service-card reveal" data-service="ux">
-            <div class="service-icon-wrapper">
-              <div class="service-icon">🎨</div>
-            </div>
-            <h3 class="service-title">UI/UX Design</h3>
-            <p class="service-desc">Evidence-based design systems, accessibility-first flows, and micro-interactions that delight users.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+          <article class="service-card ux reveal">
+            <div class="service-icon">🎨</div>
+            <h3>UI/UX Design</h3>
+            <p>Evidence-based design systems, accessibility-first flows, and micro-interactions that delight users.</p>
+            <a href="#contact">Learn More →</a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- PORTFOLIO SECTION -->
+    <!--
     <section id="portfolio">
       <div class="container">
         <div class="section-header reveal">
@@ -189,11 +593,9 @@
           </div>
         </div>
         <div class="grid portfolio-grid">
-          <article class="project-card reveal" data-category="ai">
+          <article class="project-card reveal" data-category="ai" tabindex="0">
             <div class="project-media">
-              <div class="project-thumb" aria-hidden="true">
-                  <img src="assets/images/predictive-field-ops.svg" alt="Screenshot of Predictive Field Ops project">
-              </div>
+              <div class="project-thumb" aria-hidden="true"></div>
             </div>
             <div class="project-overlay">
               <span class="tag">AI Copilot</span>
@@ -202,11 +604,9 @@
               <a class="project-link" href="#">View project →</a>
             </div>
           </article>
-          <article class="project-card reveal" data-category="cloud">
+          <article class="project-card reveal" data-category="cloud" tabindex="0">
             <div class="project-media">
-              <div class="project-thumb" aria-hidden="true">
-                  <img src="assets/images/multi-region-commerce.svg" alt="Screenshot of Multi-region Commerce project">
-              </div>
+              <div class="project-thumb" aria-hidden="true"></div>
             </div>
             <div class="project-overlay">
               <span class="tag">Cloud</span>
@@ -215,11 +615,9 @@
               <a class="project-link" href="#">View project →</a>
             </div>
           </article>
-          <article class="project-card reveal" data-category="mobile">
+          <article class="project-card reveal" data-category="mobile" tabindex="0">
             <div class="project-media">
-              <div class="project-thumb" aria-hidden="true">
-                  <img src="assets/images/offline-logistics-suite.svg" alt="Screenshot of Offline Logistics Suite project">
-              </div>
+              <div class="project-thumb" aria-hidden="true"></div>
             </div>
             <div class="project-overlay">
               <span class="tag">Mobile</span>
@@ -228,11 +626,9 @@
               <a class="project-link" href="#">View project →</a>
             </div>
           </article>
-          <article class="project-card reveal" data-category="ai">
+          <article class="project-card reveal" data-category="ai" tabindex="0">
             <div class="project-media">
-              <div class="project-thumb" aria-hidden="true">
-                  <img src="assets/images/mesh-ai-agent.svg" alt="Screenshot of Fraud Detection Mesh project">
-              </div>
+              <div class="project-thumb" aria-hidden="true"></div>
             </div>
             <div class="project-overlay">
               <span class="tag">AI</span>
@@ -243,99 +639,36 @@
           </article>
         </div>
       </div>
-    </section>
+    </section>-->
 
-    <!-- TECHNOLOGIES SECTION -->
     <section id="technologies">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <div class="eyebrow">Technologies</div>
-            <h2>Our go-to stacks</h2>
-            <p>Battle-tested tools for speed, safety, and scale.</p>
+            <h2>Battle-tested modern stack</h2>
+            <p>Polyglot teams fluent across frontend, backend, data, and cloud-native tooling.</p>
           </div>
-          <a class="btn btn-outline" href="#contact">Start a project</a>
+          <div class="badge-inline">Preferred stack • Cloud-first</div>
         </div>
-        <div class="stacks">
-          <div class="stack-card reveal" data-stack="frontend">
-            <div class="stack-header">
-              <div class="stack-icon">💻</div>
-              <h3>Frontend</h3>
-            </div>
-            <p class="stack-desc">Modern UI frameworks and tools for exceptional user experiences</p>
-            <div class="badges">
-              <span class="badge">React</span>
-              <span class="badge">Angular</span>
-              <span class="badge">Next.js</span>
-              <span class="badge">TypeScript</span>
-              <span class="badge">Tailwind</span>
-            </div>
-          </div>
-          <div class="stack-card reveal" data-stack="backend">
-            <div class="stack-header">
-              <div class="stack-icon">⚙️</div>
-              <h3>Backend</h3>
-            </div>
-            <p class="stack-desc">Scalable server-side architectures and APIs</p>
-            <div class="badges">
-              <span class="badge">Node.js</span>
-              <span class="badge">NestJS</span>
-              <span class="badge">.NET</span>
-              <span class="badge">Python</span>
-              <span class="badge">FastAPI</span>
-            </div>
-          </div>
-          <div class="stack-card reveal" data-stack="data">
-            <div class="stack-header">
-              <div class="stack-icon">🤖</div>
-              <h3>Data & AI</h3>
-            </div>
-            <p class="stack-desc">Intelligent data processing and machine learning pipelines</p>
-            <div class="badges">
-              <span class="badge">Postgres</span>
-              <span class="badge">Kafka</span>
-              <span class="badge">Spark</span>
-              <span class="badge">Delta Lake</span>
-              <span class="badge">LLMs</span>
-            </div>
-          </div>
-          <div class="stack-card reveal" data-stack="cloud">
-            <div class="stack-header">
-              <div class="stack-icon">☁️</div>
-              <h3>Cloud & DevOps</h3>
-            </div>
-            <p class="stack-desc">Infrastructure automation and cloud-native deployments</p>
-            <div class="badges">
-              <span class="badge">AWS</span>
-              <span class="badge">Azure</span>
-              <span class="badge">GCP</span>
-              <span class="badge">Kubernetes</span>
-              <span class="badge">Terraform</span>
-            </div>
-          </div>
-          <div class="stack-card reveal" data-stack="mobile">
-            <div class="stack-header">
-              <div class="stack-icon">📱</div>
-              <h3>Mobile & Edge</h3>
-            </div>
-            <p class="stack-desc">Cross-platform mobile and edge computing solutions</p>
-            <div class="badges">
-              <span class="badge">Flutter</span>
-              <span class="badge">React Native</span>
-              <span class="badge">Rust</span>
-              <span class="badge">WebAssembly</span>
-            </div>
-          </div>
+        <div class="grid tech-grid">
+          <div class="tech-card reveal">React</div>
+          <div class="tech-card reveal">Node.js</div>
+          <div class="tech-card reveal">Python</div>
+          <div class="tech-card reveal">AWS</div>
+          <div class="tech-card reveal">Docker</div>
+          <div class="tech-card reveal">Kubernetes</div>
+          <div class="tech-card reveal">TypeScript</div>
+          <div class="tech-card reveal">PostgreSQL</div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
     <section id="about">
       <div class="container about">
         <div class="reveal">
           <div class="eyebrow">About</div>
-          <h2>Why Teams choose Deriny</h2>
+          <h2>Why teams choose Deriny</h2>
           <p>Deriny leads with strategy, designs with empathy, and ships with uncompromising engineering. Our squads embed with your teams to accelerate delivery without sacrificing quality.</p>
           <ul class="list">
             <li><span class="dot"></span>Design-to-dev handoffs with production-ready component libraries</li>
@@ -360,18 +693,13 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact">
-      <div class="container">
-        <div class="section-header reveal">
+      <div class="container contact">
+        <form id="contact-form" novalidate>
           <div>
             <div class="eyebrow">Contact</div>
-            <h2>Tell us about your next build</h2>
-            <p>We respond within one business day and schedule 30-minute discovery sessions.</p>
+            <h3>Tell us about your next build</h3>
           </div>
-        </div>
-        <div class="contact">
-        <form id="contact-form" novalidate>
           <div>
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your name" required aria-required="true">
@@ -385,24 +713,18 @@
             <textarea id="message" name="message" placeholder="What challenge can we solve?" required aria-required="true"></textarea>
           </div>
           <button class="btn" type="submit">Send message</button>
-          <output class="form-status" aria-live="polite"></output>
+          <div class="form-status" role="status" aria-live="polite"></div>
         </form>
-        <div class="contact-card">
-          <h3>Let's talk outcomes</h3>
+        <div class="contact-card reveal">
+          <h3>Let’s talk outcomes</h3>
           <p>We respond within one business day. Prefer a call? We will schedule a 30-minute discovery session.</p>
           <div><strong>Email</strong><br><a href="mailto:hello@deriny.com">hello@deriny.com</a></div>
-          <div><strong>Office</strong><br>• India</div>
+          <div><strong>Office</strong><br>Silicon Valley • London • Singapore</div>
           <div><strong>Social</strong></div>
           <div class="socials">
-            <a href="#" aria-label="LinkedIn" class="social-link">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-            <a href="#" aria-label="GitHub" class="social-link">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            </a>
-            <a href="#" aria-label="Twitter" class="social-link">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="GitHub">gh</a>
+            <a href="#" aria-label="Twitter">tw</a>
           </div>
         </div>
       </div>
@@ -410,78 +732,201 @@
   </main>
 
   <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand" aria-label="Deriny Technologies">
-            <div class="brand-mark">DT</div>
-            <div>
-              <div style="font-size: 1.05em; font-weight: 800;">Deriny Technologies</div>
-              <small style="color: var(--muted); font-weight: 700; letter-spacing: 0.2px; display: block; margin-top: 4px;">Enterprise Software Studio</small>
-            </div>
-          </div>
-          <p class="footer-muted" style="margin-top: 16px; line-height: 1.6;">Enterprise-grade software development, delivered with precision and heart.</p>
-          <div class="footer-social">
-            <a href="#" aria-label="LinkedIn" class="social-link">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-            <a href="#" aria-label="GitHub" class="social-link">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            </a>
-            <a href="#" aria-label="Twitter" class="social-link">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-          </div>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" aria-label="Deriny Technologies">
+          <div class="brand-mark">DT</div>
+          <div style="font-size: 1.05em; font-weight: 800;">Deriny Technologies</div>
         </div>
-        <div class="footer-links">
-          <h4 class="footer-heading">Quick Links</h4>
-          <div class="footer-list">
-            <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#technologies">Technologies</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <h4 class="footer-heading">Compliance</h4>
-          <div class="footer-list">
-            <span class="compliance-badge">
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              SOC2-ready
-            </span>
-            <span class="compliance-badge">
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              ISO27001-aligned
-            </span>
-            <span class="compliance-badge">
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              WCAG AA
-            </span>
-          </div>
-        </div>
-        <div class="footer-newsletter">
-          <h4 class="footer-heading">Stay Updated</h4>
-          <p class="footer-muted" style="margin-bottom: 14px; line-height: 1.6;">Monthly insights on AI, cloud, and product delivery.</p>
-          <a class="btn btn-outline" href="#contact" style="width: 100%; justify-content: center;">Subscribe</a>
+        <p class="footer-muted" style="margin-top: 10px;">Enterprise-grade software development, delivered with precision and heart.</p>
+      </div>
+      <div>
+        <strong>Quick links</strong>
+        <div class="list" style="margin-top: 10px;">
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#technologies">Technologies</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-copyright">
-          <span>© 2025 Deriny Technologies. All rights reserved.</span>
-        </div>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <span class="separator">•</span>
-          <a href="#">Terms of Service</a>
+      <div>
+        <strong>Compliance</strong>
+        <div class="list" style="margin-top: 10px;">
+          <span>SOC2-ready</span>
+          <span>ISO27001-aligned</span>
+          <span>WCAG AA</span>
         </div>
       </div>
+      <div>
+        <strong>Newsletter</strong>
+        <p class="footer-muted">Monthly insights on AI, cloud, and product delivery.</p>
+        <a class="btn btn-outline" href="#contact">Subscribe</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; color: var(--muted);">
+      <span>© 2025 Deriny Technologies. All rights reserved.</span>
+      <span>Privacy • Terms</span>
     </div>
   </footer>
 
-  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+  <script>
+    const header = document.querySelector('header');
+    const root = document.documentElement;
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const navContainer = document.querySelector('.nav-links');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const observerTargets = document.querySelectorAll('.reveal');
+    const form = document.getElementById('contact-form');
+    const statusEl = document.querySelector('.form-status');
+    const parallaxItems = document.querySelectorAll('[data-parallax]');
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const themeLabel = document.querySelector('[data-theme-label]');
+    const themeMedia = window.matchMedia('(prefers-color-scheme: light)');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const applyTheme = (mode, persist = true) => {
+      const theme = mode === 'light' ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      if (persist) localStorage.setItem('theme', theme); else localStorage.removeItem('theme');
+      if (themeToggle) {
+        const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+        const icon = theme === 'dark' ? '☀️' : '🌙';
+        themeToggle.setAttribute('aria-label', label);
+        themeToggle.textContent = icon;
+      }
+      if (themeLabel) {
+        themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
+      }
+    };
+
+    const storedTheme = localStorage.getItem('theme');
+    const initialTheme = storedTheme || (themeMedia.matches ? 'light' : 'dark');
+    applyTheme(initialTheme, Boolean(storedTheme));
+
+    // Sync with system preference if user has no stored choice
+    themeMedia.addEventListener('change', (e) => {
+      const stored = localStorage.getItem('theme');
+      if (stored) return;
+      applyTheme(e.matches ? 'light' : 'dark', false);
+    });
+
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', evt => {
+        const targetId = link.getAttribute('href');
+        const section = document.querySelector(targetId);
+        if (section) {
+          evt.preventDefault();
+          section.scrollIntoView({ behavior: 'smooth' });
+          navContainer.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('no-scroll');
+        }
+      });
+    });
+
+    // Active link on scroll
+    window.addEventListener('scroll', () => {
+      const fromTop = window.scrollY + 120;
+      header.classList.toggle('scrolled', window.scrollY > 12);
+      sections.forEach(section => {
+        const id = section.getAttribute('id');
+        const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (!link) return;
+        const inView = section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop;
+        link.classList.toggle('active', inView);
+        if (inView) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    menuToggle.addEventListener('click', () => {
+      const open = navContainer.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('no-scroll', open);
+    });
+
+    // Close mobile nav on Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navContainer.classList.contains('open')) {
+        navContainer.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    // Intersection Observer for reveals
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observerTargets.forEach(el => revealObserver.observe(el));
+
+    // Pointer parallax for hero elements
+    if (!prefersReducedMotion && parallaxItems.length) {
+      window.addEventListener('pointermove', (e) => {
+        const x = (e.clientX / window.innerWidth) - 0.5;
+        const y = (e.clientY / window.innerHeight) - 0.5;
+        parallaxItems.forEach(el => {
+          const depth = Number(el.dataset.parallax || 8);
+          el.style.setProperty('--px', `${x * depth}px`);
+          el.style.setProperty('--py', `${y * depth}px`);
+        });
+      });
+    }
+
+    // Portfolio filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project-card');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        projects.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.style.display = match ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Form validation feedback
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      statusEl.textContent = '';
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name || !email || !message) {
+        statusEl.textContent = 'Please fill in all fields.';
+        return;
+      }
+      if (!emailValid) {
+        statusEl.textContent = 'Please use a valid email address.';
+        return;
+      }
+      statusEl.textContent = 'Sending...';
+      setTimeout(() => {
+        statusEl.textContent = 'Thanks! We will be in touch within one business day.';
+        form.reset();
+      }, 800);
+    });
+
+    // Theme toggle
+    themeToggle?.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark', true);
+    });
+  </script>
 </body>
 </html>
-
-
